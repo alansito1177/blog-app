@@ -10,17 +10,20 @@ function Navbar({ isAuth, logOutFunc }) {
         <Link class="navbar-brand" to="/">
           Home
         </Link>
-        <Link class="navbar-brand" to="/create-post">
-          Create Post
-        </Link>
+
         {!isAuth ? (
           <Link class="navbar-brand" to="/login">
             Login
           </Link>
         ) : (
-          <button class="btn btn-danger" onClick={logOutFunc}>
-            Log Out
-          </button>
+          <>
+            <Link class="navbar-brand" to="/create-post">
+              Create Post
+            </Link>
+            <button class="btn btn-danger" onClick={logOutFunc}>
+              Log Out
+            </button>
+          </>
         )}
       </div>
     </nav>
