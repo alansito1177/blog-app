@@ -19,7 +19,7 @@ function Login({ setIsAuth }) {
       <div className="text-center p-4">
         <h1>Start Posting Now</h1>
         <p>Sign in with Google</p>
-        <button class="btn btn-primary" onClick={signInWithGoogle}>
+        <button className="btn btn-primary" onClick={signInWithGoogle}>
           Log in
         </button>
       </div>

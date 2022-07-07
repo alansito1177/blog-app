@@ -5,22 +5,21 @@ import { auth } from "../firebase-config";
 
 function Navbar({ isAuth, logOutFunc }) {
   return (
-    <nav class="navbar navbar-dark bg-secondary">
-      <div class="container-fluid justify-content-evenly">
-        <Link class="navbar-brand" to="/">
+    <nav className="navbar navbar-dark bg-secondary">
+      <div className="container-fluid justify-content-evenly">
+        <Link className="navbar-brand" to="/">
           Home
         </Link>
-
         {!isAuth ? (
-          <Link class="navbar-brand" to="/login">
+          <Link className="navbar-brand" to="/login">
             Login
           </Link>
         ) : (
           <>
-            <Link class="navbar-brand" to="/create-post">
+            <Link className="navbar-brand" to="/create-post">
               Create Post
             </Link>
-            <button class="btn btn-danger" onClick={logOutFunc}>
+            <button className="btn btn-danger" onClick={logOutFunc}>
               Log Out
             </button>
           </>
