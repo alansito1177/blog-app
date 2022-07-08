@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  background-color: #282c34;
 }
 
 .App-logo {
@@ -15,6 +16,13 @@
 
 .tweet {
   height:33vh
+}
+.submit-button {
+  background-color: bisque;
+}
+
+.noTitle label{
+  display: none;
 }
 
 .App-header {

@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "animate.css";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase-config";
 

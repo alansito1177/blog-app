@@ -12,7 +12,7 @@ function Home() {
       setPostList(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
     getposts();
-  });
+  }, []);
 
   return (
     <div className="App">
@@ -23,18 +23,15 @@ function Home() {
             post.author.name == "Alan Silva"
           )
             return (
-              <div
-                key={post.title}
-                className="card card-header col-md-6 mx-auto"
-              >
-                <h1 classname="position-absolute top-0 start-0">
-                  {post.title}
-                </h1>
+              <div key={post.title} className="card bg-dark col-md-6 mx-auto">
+                <div className="card-header bg-dark text-light">
+                  <h1 className="card-title">{post.title}</h1>
+                </div>
 
-                <div className="card mb-4 ">
+                <div className="card  mb-4 ">
                   <p className="card-body p-4">{post.postText}</p>
                 </div>
-                <p className=" m-2 position-absolute bottom-0 end-0">
+                <p className="mb-0 m-1 text-light position-absolute bottom-0 end-0">
                   @{post.author.name}
                 </p>
               </div>
@@ -46,18 +43,15 @@ function Home() {
           .map((post) => {
             if (post.title != "Log in and create a post")
               return (
-                <div
-                  key={post.title}
-                  className="card card-header col-md-6 mx-auto"
-                >
-                  <h1 classname="position-absolute top-0 start-0">
-                    {post.title}
-                  </h1>
+                <div key={post.title} className="card bg-dark col-md-6 mx-auto">
+                  <div className="card-header bg-dark text-light">
+                    <h1 className="card-title">{post.title}</h1>
+                  </div>
 
-                  <div className="card mb-4 ">
+                  <div className="card  mb-4 ">
                     <p className="card-body p-4">{post.postText}</p>
                   </div>
-                  <p className=" m-2 position-absolute bottom-0 end-0">
+                  <p className="mb-0 m-1 text-light position-absolute bottom-0 end-0">
                     @{post.author.name}
                   </p>
                 </div>

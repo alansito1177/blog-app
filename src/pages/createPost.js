@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { addDoc, collection } from "firebase/firestore";
 import { auth, db } from "../firebase-config";
 import { useNavigate } from "react-router-dom";
+import Form from "@rjsf/core";
 function CreatePost({ isAuth }) {
   const [title, setTitle] = useState("");
   const [postText, setPostText] = useState("");
@@ -20,10 +21,48 @@ function CreatePost({ isAuth }) {
 
   useEffect(() => {
     if (!isAuth) {
-      navigate("/login");
+      //navigate("/login");
     }
   }, []);
 
+  const schema = {
+    type: "object",
+    title: "Create A Post",
+    properties: {
+      title: {
+        type: "string",
+        title: "Title",
+      },
+      postBody: {
+        type: "string",
+        title: "Post Body",
+      },
+      submit: {
+        type: "string",
+        title: "Submit Post",
+      },
+    },
+  };
+
+  const uiSchema = {
+    title: { "ui:placeholder": "Title..." },
+    postBody: {
+      "ui:widget": "textarea",
+      "ui:placeholder": "Post...",
+    },
+    submit: {
+      classNames: "noTitle",
+      "ui:widget": (props) => {
+        return (
+          <input
+            type="submit"
+            className="btn btn-primary col-12 mt-2"
+            value="Submit Post"
+          />
+        );
+      },
+    },
+  };
   return (
     <div className="container p-2">
       <div className="row m-2 justify-content-center">
@@ -51,11 +90,19 @@ function CreatePost({ isAuth }) {
               />
             </div>
             <button
-              className=" input-group btn btn-primary mt-3"
+              className="input-group btn btn-primary mt-3"
               onClick={createPost}
             >
               Submit Post
             </button>
+
+            <Form
+              schema={schema}
+              uiSchema={uiSchema}
+              onSubmit={(e) => {
+                console.log(e.formData);
+              }}
+            />
           </div>
         </div>
       </div>
