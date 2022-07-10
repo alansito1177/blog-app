@@ -4,13 +4,13 @@ import { auth, db } from "../firebase-config";
 import { useNavigate } from "react-router-dom";
 import Form from "@rjsf/core";
 function CreatePost({ isAuth }) {
-  const [title, setTitle] = useState("");
-  const [postText, setPostText] = useState("");
+  //const [title, setTitle] = useState("");
+  //const [postText, setPostText] = useState("");
 
   const postsCollectionRef = collection(db, "posts");
   let navigate = useNavigate();
 
-  const createPost = async () => {
+  const createPost = async (title, postText) => {
     await addDoc(postsCollectionRef, {
       title,
       postText,
@@ -29,11 +29,11 @@ function CreatePost({ isAuth }) {
     type: "object",
     title: "Create A Post",
     properties: {
-      title: {
+      Title: {
         type: "string",
         title: "Title",
       },
-      postBody: {
+      PostBody: {
         type: "string",
         title: "Post Body",
       },
@@ -42,17 +42,19 @@ function CreatePost({ isAuth }) {
         title: "Submit Post",
       },
     },
+    required: ["Title", "PostBody"],
   };
 
   const uiSchema = {
-    title: { "ui:placeholder": "Title..." },
-    postBody: {
+    Title: { "ui:placeholder": "Title..." },
+    PostBody: {
       "ui:widget": "textarea",
       "ui:placeholder": "Post...",
     },
     submit: {
       classNames: "noTitle",
-      "ui:widget": (props) => {
+      "ui:widget": (e) => {
+        console.log(e.formData);
         return (
           <input
             type="submit"
@@ -62,13 +64,16 @@ function CreatePost({ isAuth }) {
         );
       },
     },
+    "ui:submitButtonOptions": {
+      norender: true,
+    },
   };
   return (
-    <div className="container p-2">
+    <div className="fluid-container App p-2">
       <div className="row m-2 justify-content-center">
         <div className="card col-md-5 text-center">
           <div className="card-body">
-            <h1>Create a post</h1>
+            {/* <h1>Create a post</h1>
             <div>
               <h3>Title:</h3>
               <input
@@ -94,13 +99,13 @@ function CreatePost({ isAuth }) {
               onClick={createPost}
             >
               Submit Post
-            </button>
+            </button> */}
 
             <Form
               schema={schema}
               uiSchema={uiSchema}
-              onSubmit={(e) => {
-                console.log(e.formData);
+              onSubmit={async (e) => {
+                createPost(e.formData.Title, e.formData.PostBody);
               }}
             />
           </div>

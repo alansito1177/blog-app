@@ -15,7 +15,7 @@ function Login({ setIsAuth }) {
   };
 
   return (
-    <div className="loginPage container">
+    <div className="loginPage fluid-container App text-white">
       <div className="text-center p-4">
         <h1>Start Posting Now</h1>
         <p>Sign in with Google</p>
