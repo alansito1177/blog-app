@@ -1,10 +1,12 @@
 import { getDocs, collection } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { db } from "../firebase-config";
+import logo from "../logo.svg";
 
 function Home() {
   const [postList, setPostList] = useState([]);
   const postsCollectionRef = collection(db, "posts");
+  const [postsRecieved, setPostsRecieved] = useState(false);
 
   useEffect(() => {
     const getposts = async () => {
@@ -12,10 +14,10 @@ function Home() {
       setPostList(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
     getposts();
+    setPostsRecieved(true);
   }, []);
-
-  return (
-    <div className="App">
+  const Body = () => {
+    return (
       <div className="fluid-container col-12 mx-auto">
         {postList.map((post) => {
           if (
@@ -58,7 +60,13 @@ function Home() {
               );
           })}
       </div>
-    </div>
+    );
+  };
+  const SpinningLogo = () => {
+    return <img src={logo} alt="logo" className="App-logo col-12 mx-auto" />;
+  };
+  return (
+    <div className="App">{postsRecieved ? <Body /> : <SpinningLogo />}</div>
   );
 }
 

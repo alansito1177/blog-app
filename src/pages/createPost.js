@@ -54,7 +54,6 @@ function CreatePost({ isAuth }) {
     submit: {
       classNames: "noTitle",
       "ui:widget": (e) => {
-        console.log(e.formData);
         return (
           <input
             type="submit"
